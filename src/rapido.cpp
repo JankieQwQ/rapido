@@ -1,4 +1,4 @@
-#include <iostream>
+#include <stdio.h>
 
 void disable_sync() {
     std::ios::sync_with_stdio(false);
@@ -50,6 +50,20 @@ void rnextline() {
     rprint("\n");
 }
 
+bool rfileoutput(const char* str, const char* filename) {
+    FILE* file = fopen(filename, "wb");
+    if (file == NULL) {
+        return false;
+    }
+    size_t len = strlen(str);
+    size_t written = fwrite(str, 1, len, file);
+    if (written != len) {
+        fclose(file);
+        return false;
+    }
+    fclose(file);
+    return true;
+}
 int rinput(int safe=0) {
     int x = 0, w = 1;
     char ch = getchar_unlocked();
