@@ -25,6 +25,10 @@ void rprint(const char* str,char endl='\n'){
     #endif
 }
 
+void rnextline(){
+    rprint('\n');
+}
+
 int rinput() {
     int x = 0, w = 1;
     char ch = getchar_unlocked();
