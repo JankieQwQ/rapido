@@ -123,3 +123,4 @@ int rinput(int safe=0) {
     #endif
     return x * w;
 }
+

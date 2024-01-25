@@ -3,5 +3,7 @@
 #define endl "\n"
 void rprint(const char* str,char endl='\n');
 void rnextline();
+bool rfileoutput(const char* str,const char* filename);
 int rinput();
+
 #endif
