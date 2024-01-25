@@ -1,10 +1,10 @@
 #include <iostream>
 
-void disable_sync(){
+void disable_sync() {
     std::ios::sync_with_stdio(false);
 }
 
-void rprint(const char* str,char endl='\n',int safe=0){
+void rprint(const char* str,char endl='\n',int safe=0) {
     #ifdef __GNUC__
         if(!safe){
             std::cout << str << endl;
@@ -46,7 +46,7 @@ void rprint(const char* str,char endl='\n',int safe=0){
     #endif
 }
 
-void rnextline(){
+void rnextline() {
     rprint("\n");
 }
 
