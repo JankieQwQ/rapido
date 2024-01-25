@@ -101,6 +101,7 @@ int rinput(safemode=0) {
             "ret\n"
         );
     #else
+        if(!safe){
         while (ch < '0' || ch > '9') {
             if (ch == '-') w = -1;
             ch = getchar_unlocked();
@@ -109,6 +110,15 @@ int rinput(safemode=0) {
         while (ch >= '0' && ch <= '9') {
             x = x * 10 + (ch - '0');
             ch = getchar_unlocked();
+        }}else{
+        while (ch < '0' || ch > '9') {
+            if (ch == '-') w = -1;
+            ch = getchar();
+        }
+    
+        while (ch >= '0' && ch <= '9') {
+            x = x * 10 + (ch - '0');
+            ch = getchar();
         }
     #endif
     return x * w;
