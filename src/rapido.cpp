@@ -24,3 +24,20 @@ void rprint(const char* str,char endl='\n'){
         );
     #endif
 }
+
+int rinput() {
+    int x = 0, w = 1;
+    char ch = getchar_unlocked();
+    
+    while (ch < '0' || ch > '9') {
+        if (ch == '-') w = -1;
+        ch = getchar_unlocked();
+    }
+    
+    while (ch >= '0' && ch <= '9') {
+        x = x * 10 + (ch - '0');
+        ch = getchar_unlocked();
+    }
+    
+    return x * w;
+}
