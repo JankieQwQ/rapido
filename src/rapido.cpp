@@ -50,6 +50,33 @@ void rnextline() {
     rprint("\n");
 }
 
+size_t strlen(const char* str) {
+    #ifdef __GNUC__
+    size_t len = 0;
+    while (str[len] != '\0') {
+        len++;
+    }
+    return len;
+    #else
+    __m128i zero = _mm_setzero_si128();
+    __m128i ones = _mm_set1_epi8(1);
+    int i;
+    for (i = 0; str[i] != '\0'; i += 16) {
+        __m128i chars = _mm_loadu_si128((__m128i*)(str + i));
+        __m128i cmp = _mm_cmpeq_epi8(chars, zero);
+        int mask = _mm_movemask_epi8(cmp);
+        if (mask != 0) {
+            int pos = __builtin_ctz(mask);
+            return i + pos;
+        }
+    }
+    while (str[i] != '\0') {
+        i++;
+    }
+    return i;
+    #endif
+}
+
 bool rfileoutput(const char* str, const char* filename) {
     FILE* file = fopen(filename, "wb");
     if (file == NULL) {
