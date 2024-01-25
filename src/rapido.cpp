@@ -50,7 +50,7 @@ void rnextline(){
     rprint('\n');
 }
 
-int rinput(safemode=0) {
+int rinput(int safe=0) {
     int x = 0, w = 1;
     char ch = getchar_unlocked();
     #ifdef __GNUC__
