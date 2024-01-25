@@ -1,5 +1,9 @@
 #include <stdio.h>
-
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <sys/mman.h>
 void disable_sync() {
     std::ios::sync_with_stdio(false);
 }
@@ -77,6 +81,25 @@ size_t strlen(const char* str) {
     #endif
 }
 
+void* rfileinput(const char* filename) {
+    int fd = open(filename, O_RDONLY);
+    if (fd == -1) {
+        return nullptr;
+    }
+    struct stat fileStat;
+    if (fstat(fd, &fileStat) == -1) {
+        close(fd);
+        return nullptr;
+    }
+    off_t fileSize = fileStat.st_size;
+    void* data = mmap(NULL, fileSize, PROT_READ, MAP_PRIVATE, fd, 0);
+    if (data == MAP_FAILED) {
+        close(fd);
+        return nullptr;
+    }
+    close(fd);
+    return data;
+}
 bool rfileoutput(const char* str, const char* filename) {
     FILE* file = fopen(filename, "wb");
     if (file == NULL) {
