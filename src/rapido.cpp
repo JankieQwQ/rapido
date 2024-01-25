@@ -1,9 +1,11 @@
 #include <iostream>
 
-void rprint(const char* str,char endl='\n'){
+void rprint(const char* str,char endl='\n',int safe=0){
     #ifdef __GNUC__
         // 在 GUNC 环境下，关闭流同步，不使用endl换行的std::cout是最快的。
-        std::ios::sync_with_stdio(false);
+        if(!safe){
+            std::ios::sync_with_stdio(false);
+        }
         std::cout << str << endl;
     #else 
         __asm__(
