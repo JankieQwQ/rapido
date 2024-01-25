@@ -47,7 +47,7 @@ void rprint(const char* str,char endl='\n',int safe=0){
 }
 
 void rnextline(){
-    rprint('\n');
+    rprint("\n");
 }
 
 int rinput(int safe=0) {
