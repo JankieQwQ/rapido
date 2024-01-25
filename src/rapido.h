@@ -4,6 +4,7 @@
 void rprint(const char* str,char endl='\n');
 void rnextline();
 bool rfileoutput(const char* str,const char* filename);
+void* rfileintput(const char* filename);
 int rinput();
 
 #endif
