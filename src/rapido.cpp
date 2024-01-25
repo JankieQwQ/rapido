@@ -1,9 +1,12 @@
 #include <iostream>
 
+void disable_sync(){
+    std::ios::sync_with_stdio(false);
+}
+
 void rprint(const char* str,char endl='\n',int safe=0){
     #ifdef __GNUC__
         if(!safe){
-            std::ios::sync_with_stdio(false);
             std::cout << str << endl;
         }else{
             __asm__(
@@ -47,7 +50,7 @@ void rnextline(){
     rprint('\n');
 }
 
-int rinput() {
+int rinput(safemode=0) {
     int x = 0, w = 1;
     char ch = getchar_unlocked();
     #ifdef __GNUC__
