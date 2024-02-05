@@ -25,7 +25,6 @@ void rprint(const char* str,char endl='\n',int safe=0) {
                 "call    fputs\n"
                 "mov     edi, 10\n"
                 "call    putchar\n"
-                "nop\n"
                 "leave\n"
                 "ret\n"
         );
